@@ -1,22 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 public class Cart {
-    private List<Product> products;
-
-
-    public Cart() {
-        this.products = new ArrayList<>();
-    }
-
+    private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
         products.add(product);
     }
 
-
-    public void removeProduct(Product product) {
-        products.remove(product);
+    public boolean removeProductById(int id) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getId() == id) {
+                products.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     public double getTotalPrice() {
@@ -27,14 +30,9 @@ public class Cart {
         return total;
     }
 
-    public List<Product> getProducts() {
-        return new ArrayList<>(products);
-    }
-
     public void clear() {
         products.clear();
     }
-
 
     @Override
     public String toString() {
@@ -46,6 +44,3 @@ public class Cart {
         return sb.toString();
     }
 }
-
-
-
